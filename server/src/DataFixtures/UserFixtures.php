@@ -23,6 +23,7 @@ class UserFixtures extends Fixture
             ->setBirthDate((new \DateTime())->setDate(1998, 06, 11))
             ->setRoles([ 'ROLE_USER' ])
             ->setEmail('drakx116@gmail.com')
+            ->setUsername('drakx116@gmail.com')
             ->setPassword(
                 $this->passwordHasher->hashPassword($user, 'admin')
             );

@@ -131,6 +131,9 @@
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
+    "phpstan/phpstan": {
+        "version": "1.5.4"
+    },
     "psr/cache": {
         "version": "3.0.0"
     },
@@ -315,6 +318,9 @@
     },
     "symfony/security-http": {
         "version": "v6.0.5"
+    },
+    "symfony/serializer": {
+        "version": "v6.0.7"
     },
     "symfony/service-contracts": {
         "version": "v3.0.0"

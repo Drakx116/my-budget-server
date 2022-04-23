@@ -14,7 +14,7 @@ final class Version20220423085127 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Create Operation and link to Operation Category';
     }
 
     public function up(Schema $schema): void

@@ -33,6 +33,10 @@ class Operation
     #[ORM\ManyToOne(targetEntity: OperationCategory::class, inversedBy: 'operations')]
     private $category;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'operations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $author;
+
     public function getId(): int
     {
         return $this->id;
@@ -106,6 +110,18 @@ class Operation
     public function setCategory(?OperationCategory $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

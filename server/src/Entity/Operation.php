@@ -83,7 +83,7 @@ class Operation
         return $this->method;
     }
 
-    public function setMethod(string $method): self
+    public function setMethod(PaymentType $method): self
     {
         $this->method = $method;
 
@@ -95,7 +95,7 @@ class Operation
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(OperationType $type): self
     {
         $this->type = $type;
 

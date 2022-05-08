@@ -2,7 +2,9 @@
 
 namespace App\Service\Manager;
 
+use Symfony\Component\HttpFoundation\Request;
+
 interface ManagerInterface
 {
-    public function createOneFromRequest(array $parameters);
+    public function createOneFromRequest(Request $request);
 }

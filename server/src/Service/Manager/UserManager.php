@@ -4,17 +4,26 @@ namespace App\Service\Manager;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Security;
 
-class UserManager implements ManagerInterface
+class UserManager extends AbstractManager
 {
+    #[Pure]
     public function __construct(
+        protected Security $security,
         private UserRepository $userRepository,
-        private UserPasswordHasherInterface $hasher
-    ) {}
+        private UserPasswordHasherInterface $hasher,
+    ) {
+        parent::__construct($security);
+    }
 
-    public function createOneFromRequest(array $parameters): array | User
+    public function createOneFromRequest(Request $request): array | User
     {
+        $parameters = self::getParametersFromRequest($request);
+
         $firstName = $parameters['firstName'] ?? null;
         $lastName = $parameters['lastName'] ?? null;
         $birthDateString = $parameters['birthDate'] ?? null;

@@ -4,7 +4,6 @@ namespace App\Controller\API;
 
 use App\Entity\User;
 use App\Service\Manager\UserManager;
-use App\Service\Utils\JsonHelper;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +15,7 @@ class AuthController extends BaseController
     #[Route(path: '/register', methods: [ 'POST' ])]
     public function register(Request $request, UserManager $userManager): JsonResponse
     {
-        $response = $userManager->createOneFromRequest(JsonHelper::decode($request->getContent()));
+        $response = $userManager->createOneFromRequest($request);
 
         if (!$response instanceof User) {
             return self::generateInvalidRequestResponse($response['error']);

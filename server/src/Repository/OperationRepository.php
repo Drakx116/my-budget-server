@@ -52,4 +52,16 @@ class OperationRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+
+    public function findUserSummary(User $user): array
+    {
+        return $this->createQueryBuilder('operation')
+            ->select('LOWER(operation.type) as type, SUM(operation.amount) as total')
+            ->andWhere('operation.author = :user')
+            ->setParameter('user', $user)
+            ->groupBy('operation.type')
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

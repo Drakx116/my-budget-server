@@ -42,5 +42,16 @@ class OperationController extends BaseController
 
         return new JsonResponse($operations, Response::HTTP_OK);
     }
+
+    #[Route(path: '/summary', methods: ['GET'])]
+    public function summary(Security $security, OperationRepository $operationRepository): JsonResponse
+    {
+        /** @var User $user */
+        $user = $security->getUser();
+
+        $summary = $operationRepository->findUserSummary($user);
+
+        return new JsonResponse($summary, Response::HTTP_OK);
+    }
 }
 

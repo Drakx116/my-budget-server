@@ -14,8 +14,8 @@ enum PaymentType: string
         return match ($paymentType) {
             'cash' => self::CASH,
             'check' => self::CHECK,
-            'creditCard' => self::CREDIT_CARD,
-            'mealVoucher' => self::MEAL_VOUCHER,
+            'credit_card' => self::CREDIT_CARD,
+            'meal_voucher' => self::MEAL_VOUCHER,
             default => null
         };
     }

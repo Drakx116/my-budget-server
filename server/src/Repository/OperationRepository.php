@@ -43,7 +43,8 @@ class OperationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('operation')
             ->select('LOWER(operation.type) as type, operation.label, operation.amount, LOWER(operation.method) as method, operation.date')
             ->andWhere('operation.author = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+            ->orderBy('operation.date', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);

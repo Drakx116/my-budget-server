@@ -4,6 +4,7 @@ namespace App\Controller\API;
 
 use App\Entity\Operation;
 use App\Entity\User;
+use App\Enum\OperationType;
 use App\Repository\OperationRepository;
 use App\Service\Manager\OperationManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,8 +38,11 @@ class OperationController extends BaseController
         $user = $security->getUser();
 
         $limit = (int) $request->query->get('limit');
+        $operationType = $request->query->get('type');
 
-        $operations = $operationRepository->findUserLastOperations($user, $limit);
+        $type = OperationType::fromClient($operationType);
+
+        $operations = $operationRepository->findUserLastOperations($user, $limit, $type);
 
         return new JsonResponse($operations, Response::HTTP_OK);
     }

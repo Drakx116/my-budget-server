@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Operation;
 use App\Entity\User;
+use App\Enum\OperationType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -38,7 +39,7 @@ class OperationRepository extends ServiceEntityRepository
         }
     }
 
-    public function findUserLastOperations(User $user, int $limit)
+    public function findUserLastOperations(User $user, int $limit, ?OperationType $type)
     {
         $qb = $this->createQueryBuilder('operation')
             ->select('LOWER(operation.type) as type, operation.label, operation.amount, LOWER(operation.method) as method, operation.date')
@@ -48,6 +49,11 @@ class OperationRepository extends ServiceEntityRepository
 
         if ($limit) {
             $qb->setMaxResults($limit);
+        }
+
+        if ($type) {
+            $qb ->andWhere('operation.type = :type')
+                ->setParameter('type', $type->name);
         }
 
         return $qb->getQuery()->getResult();

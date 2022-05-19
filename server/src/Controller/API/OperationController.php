@@ -6,6 +6,7 @@ use App\Entity\Operation;
 use App\Entity\User;
 use App\Enum\OperationType;
 use App\Repository\OperationRepository;
+use App\Serializer\OperationSerializer;
 use App\Service\Manager\OperationManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +33,11 @@ class OperationController extends BaseController
     }
 
     #[Route(path: '', methods: ['GET'])]
-    public function list(Request $request, Security $security, OperationRepository $operationRepository): JsonResponse
+    public function list(
+        Request $request,
+        Security $security,
+        OperationRepository $operationRepository,
+    ): JsonResponse
     {
         /** @var User $user */
         $user = $security->getUser();
@@ -44,7 +49,9 @@ class OperationController extends BaseController
 
         $operations = $operationRepository->findUserLastOperations($user, $limit, $type);
 
-        return new JsonResponse($operations, Response::HTTP_OK);
+        return new JsonResponse(
+            OperationSerializer::serialize($operations)
+        , Response::HTTP_OK);
     }
 
     #[Route(path: '/summary', methods: ['GET'])]

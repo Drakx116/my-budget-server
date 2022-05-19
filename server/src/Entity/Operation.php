@@ -78,7 +78,7 @@ class Operation
         return $this;
     }
 
-    public function getMethod(): string
+    public function getMethod(): PaymentType
     {
         return $this->method;
     }
@@ -90,7 +90,7 @@ class Operation
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): OperationType
     {
         return $this->type;
     }

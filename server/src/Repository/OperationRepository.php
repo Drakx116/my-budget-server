@@ -42,7 +42,6 @@ class OperationRepository extends ServiceEntityRepository
     public function findUserLastOperations(User $user, int $limit, ?OperationType $type)
     {
         $qb = $this->createQueryBuilder('operation')
-            ->select('LOWER(operation.type) as type, operation.label, operation.amount, LOWER(operation.method) as method, operation.date')
             ->andWhere('operation.author = :user')
             ->setParameter('user', $user)
             ->orderBy('operation.date', 'DESC');

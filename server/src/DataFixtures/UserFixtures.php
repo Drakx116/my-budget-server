@@ -18,8 +18,8 @@ class UserFixtures extends Fixture
         $user = new User();
 
         $user
-            ->setFirstName('User')
-            ->setLastName('Lambda')
+            ->setFirstName('Alex')
+            ->setLastName('Guyot')
             ->setBirthDate((new \DateTime())->setDate(1998, 06, 11))
             ->setRoles([ 'ROLE_USER' ])
             ->setEmail('drakx116@gmail.com')
